@@ -1,0 +1,124 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX_STUDENTS = 100;
+
+class Student
+{
+private:
+    string name;
+    double grade;
+
+public:
+    Student(string n = "", double g = 0) : name(n), grade(g) {}
+     string getName() const { return name; }
+    double getGrade() const { return grade; }
+};
+
+class GradeManager {
+private:
+    Student students[MAX_STUDENTS];
+    int numStudents;
+
+public:
+
+    GradeManager() : numStudents(0) {}
+
+    void addStudent(const Student& student)
+    {
+        if (numStudents < MAX_STUDENTS) 
+        {
+            students[numStudents++] = student;
+        }
+        else
+        {
+            cout << "Maximum number of students reached." << endl;
+        }
+    }
+
+    double calculateAverageGrade() const 
+    {
+        if (numStudents == 0) 
+        {
+            return 0; 
+        }
+
+        double totalGrade = 0.0;
+        for (int i = 0; i < numStudents; ++i) 
+        {
+            totalGrade += students[i].getGrade();
+        }
+        return totalGrade / numStudents;
+    }
+    double findHighestGrade() const 
+    {
+        if (numStudents == 0) 
+        {
+            return 0; 
+        }
+
+        double maxGrade = students[0].getGrade();
+        for (int i = 1; i < numStudents; ++i)
+        {
+            if (students[i].getGrade() > maxGrade) 
+            {
+                maxGrade = students[i].getGrade();
+            }
+        }
+        return maxGrade;
+    }
+
+    double findLowestGrade() const 
+    {
+        if (numStudents == 0) 
+        {
+            return 0;
+        }
+
+        double minGrade = students[0].getGrade();
+        for (int i = 1; i < numStudents; ++i) 
+        {
+            if (students[i].getGrade() < minGrade)
+            {
+                minGrade = students[i].getGrade();
+            }
+        }
+        return minGrade;
+    }
+};
+
+int main() 
+{
+    GradeManager gradeManager;
+    string name;
+    double grade;
+    char continueInput;
+
+    cout << " Student Grade Management System!" << endl;
+
+    do
+    {
+        cout << "Enter student name: ";
+        cin >> name;
+
+        cout << "Enter student grade: ";
+        cin >> grade;
+
+        gradeManager.addStudent(Student(name, grade));
+
+        cout << "Do you want to enter another student? (y/n): ";
+        cin >> continueInput;
+    } while (continueInput == 'y' || continueInput == 'Y');
+
+    double averageGrade = gradeManager.calculateAverageGrade();
+    double highestGrade = gradeManager.findHighestGrade();
+    double lowestGrade = gradeManager.findLowestGrade();
+
+    cout << " Average grade: " << averageGrade << endl;
+    cout << " Highest grade: " << highestGrade << endl;
+    cout << " Lowest grade: " << lowestGrade << endl;
+
+    return 0;
+}
