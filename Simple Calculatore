@@ -1,0 +1,58 @@
+echo "# CODSOFT" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ToobaAbbasi/CODSOFT.git
+git push -u origin main
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    char operation;
+    double num1;
+    double num2;
+    double result;
+
+    cout << "Welcome to my Simple Calculator " << endl;
+
+    cout << "Enter the first number: ";
+    cin >> num1;
+
+    cout << "Enter the second number: ";
+    cin >> num2;
+
+    cout << "Enter the operation you want to perform (+, -, *, /): " << endl;
+    cin >> operation;
+
+    switch (operation) 
+    {
+    case '+':
+        result = num1 + num2;
+        cout << "Result: " << result << endl;
+        break;
+    case '-':
+        result = num1 - num2;
+        cout << "Result: " << result << endl;
+        break;
+    case '*':
+        result = num1 * num2;
+        cout << "Result: " << result << endl;
+        break;
+    case '/':
+        if (num2 != 0) {
+            result = num1 / num2;
+            cout << "Result: " << result << endl;
+        }
+        else 
+        {
+            cout << "Error! Division by zero." << endl;
+        }
+        break;
+    default:
+        cout << "Invalid Syntax!!!!" << endl;
+    }
+
+    return 0;
+}
